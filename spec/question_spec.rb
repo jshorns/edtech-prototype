@@ -17,4 +17,11 @@ describe Question do
   it { is_expected.to respond_to :difficulty }
   it { is_expected.to respond_to :correct_answer }
 
+  describe '#student_answer' do
+    it 'assigns an answer value to the student answer attribute' do
+      subject.submit_answer(:a)
+      expect(subject.student_answer).to eq :a
+    end
+  end
+
 end
