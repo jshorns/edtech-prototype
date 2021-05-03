@@ -24,4 +24,19 @@ describe Question do
     end
   end
 
+  describe '#correctly_answered?' do
+    it 'returns nil if the student has not submitted an answer yet' do
+      p subject.student_answer
+      expect(subject.correctly_answered?).to be nil
+    end
+    it 'returns true if the student submitted the correct answer' do
+      subject.submit_answer(:a)
+      expect(subject.correctly_answered?).to be true
+    end
+    it 'returns false if the student did not submit the correct answer' do
+      subject.submit_answer(:d)
+      expect(subject.correctly_answered?).to be false
+    end
+  end
+
 end

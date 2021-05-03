@@ -18,4 +18,10 @@ class Question
   def submit_answer(answer)
     @student_answer = answer
   end
+
+  def correctly_answered?
+    return unless @student_answer
+    @student_answer == @correct_answer
+  end
+
 end
