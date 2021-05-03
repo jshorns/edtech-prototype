@@ -60,6 +60,7 @@ lesson->qp: "fetch another question based on student record average"
 
 - I'm going to try and TDD this prototype in Ruby. I plan to begin with the question picker as a method and work up from there.
 - I quickly discovered I couldn't test very much without some sample questions, which I then wrote as an array of hashes (obviously in the real deal they wouldn't be cat themed). Through trying to play around with this I also discovered that irb can't access local variables in required files, but it can access constants, which I didn't know!
+- Having got the question picker to return one of a set of questions, I then modified it to return a question of a given difficulty. The next step would be to modify the algorithm to calculate the required difficulty based on the student's previous answers. I realised at this point that refactoring would be necessary and I needed to start developing my OOP structure. I realised too that I had misssed a crucial element of my planning and user stories - the aspect of students being able to input answers, and being able to see if they were correct or not! This being essential to the functioning of the software, I decided to reorientate my approach to prioritise this, writing a couple of extra user stories and amending my sequence diagram.
 
 test questions:
 
