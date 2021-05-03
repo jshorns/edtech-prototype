@@ -56,6 +56,6 @@ question5 = {
 
 QUESTIONS = [question1, question2, question3, question4, question5]
 
-def question_picker
-  return QUESTIONS.sample
+def question_picker(difficulty)
+  QUESTIONS.select { |question| question[:difficulty] == difficulty }.sample
 end
