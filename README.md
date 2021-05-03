@@ -11,6 +11,14 @@ a program that gives students a follow-up question from an appropriate category 
 ## User Stories
 
 _As a student,
+so I can challenge my learning,
+I want to be able to answer multiple choice questions._
+
+_As a student,
+so I can assess my learning,
+I want to see if my answers were correct or not._
+
+_As a student,
 so I can stretch and consolidate my understanding where necessary,
 I want to be assigned a question of the appropriate level._
 
