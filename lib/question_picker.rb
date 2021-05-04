@@ -7,13 +7,13 @@ class QuestionPicker
   end
 
   def decide_difficulty
-    return 2 unless !@student_record.empty?
-    return 3 if @student_record.last.correctly_answered? && @student_record.last.difficulty == 3
-    return 1 if !@student_record.last.correctly_answered? && @student_record.last.difficulty == 1
-    if @student_record.last.correctly_answered?
-      @student_record.last.difficulty + 1
+    return 2 unless last_question
+    if last_question.correctly_answered?
+      return max_level if at_max_level
+      last_question.difficulty + 1
     else
-      @student_record.last.difficulty - 1
+      return min_level if at_min_level
+      last_question.difficulty - 1
     end
   end
 
@@ -24,6 +24,28 @@ class QuestionPicker
   def answer_question(question, answer)
     question.submit_answer(answer)
     @student_record << question
+  end
+
+  private
+
+  def max_level
+    @question_set.max_by{ |q| q.difficulty }.difficulty
+  end
+
+  def min_level
+    @question_set.min_by{ |q| q.difficulty }.difficulty
+  end
+
+  def at_max_level
+    last_question.difficulty == max_level
+  end
+
+  def at_min_level
+    last_question.difficulty == min_level
+  end
+
+  def last_question
+    @student_record.last
   end
 
 
