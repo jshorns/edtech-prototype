@@ -11,6 +11,8 @@ class QuestionPicker
     return 3 if @student_record.last.correctly_answered? && @student_record.last.difficulty == 3
     if @student_record.last.correctly_answered?
       @student_record.last.difficulty + 1
+    else
+      @student_record.last.difficulty - 1
     end
   end
 
