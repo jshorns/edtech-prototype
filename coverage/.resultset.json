@@ -48,19 +48,30 @@
           null,
           null,
           2,
+          2,
           null,
           1,
           1,
           1,
+          1,
+          null,
+          null,
           null,
           null
         ]
       },
       "/Users/joey/Projects/edtech-prototype/lib/question_picker.rb": {
         "lines": [
+          1,
+          null,
+          1,
+          1,
+          null,
           null,
           1,
           6,
+          null,
+          null,
           null
         ]
       },
@@ -142,6 +153,6 @@
         ]
       }
     },
-    "timestamp": 1620066784
+    "timestamp": 1620137854
   }
 }

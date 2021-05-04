@@ -1,6 +1,6 @@
 require 'question_picker'
 
-describe 'question_picker' do
+describe QuestionPicker do
   let(:question1) { double(:question, question_text: "Is pudding a cat or a dog?", 
                                       answer_a: "cat", 
                                       answer_b: "dog", 
@@ -43,9 +43,13 @@ describe 'question_picker' do
                                 )}
                                 
   let(:question_set)  { [question1, question2, question3, question4, question5] }
+  subject { described_class.new(question_set) }
 
-  it 'should return a question of a given difficulty' do
-    question = question_picker(3, question_set)
-    expect(question.difficulty).to eq(3)
+  describe '#fetch_question' do
+    it 'should return a question of a given difficulty' do
+      question = subject.fetch_question(3)
+      expect(question.difficulty).to eq(3)
+    end
   end
+
 end
