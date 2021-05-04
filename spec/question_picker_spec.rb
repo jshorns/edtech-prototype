@@ -52,4 +52,18 @@ describe QuestionPicker do
     end
   end
 
+  describe '#answer_question' do
+  before(:each) {
+    allow(question1).to receive(:submit_answer).with(:a)
+  }
+    it 'allows question answer to be submitted' do
+      expect(question1).to receive(:submit_answer).with(:a)
+      subject.answer_question(question1, :a)
+    end
+    it 'stores the answered question to a student record array' do
+      subject.answer_question(question1, :a)
+      expect(subject.student_record).to include(question1)
+    end
+  end
+
 end
