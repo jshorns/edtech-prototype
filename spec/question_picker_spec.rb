@@ -66,4 +66,10 @@ describe QuestionPicker do
     end
   end
 
+  describe '#decide_difficulty' do
+    it 'should return 2 if student record is empty' do
+      expect(subject.decide_difficulty).to eq 2
+    end
+  end
+
 end

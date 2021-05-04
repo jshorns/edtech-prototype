@@ -6,6 +6,10 @@ class QuestionPicker
     @student_record = []
   end
 
+  def decide_difficulty
+    2 unless !@student_record.empty?
+  end
+
   def fetch_question(difficulty)
     @question_set.select { |question| question.difficulty == difficulty }.sample
   end
