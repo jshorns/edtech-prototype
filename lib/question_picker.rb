@@ -7,7 +7,7 @@ class QuestionPicker
   end
 
   def decide_difficulty
-    return 2 unless last_question
+    return mid_level unless last_question
     if last_question.correctly_answered?
       return max_level if at_max_level
       last_question.difficulty + 1
@@ -27,6 +27,12 @@ class QuestionPicker
   end
 
   private
+
+  def mid_level
+    levels = @question_set.map{ |q| q.difficulty }.sort.uniq
+    return levels[(levels.length/2) - 1] if levels.length.even?
+    return levels[(levels.length - 1) /2] if levels.length.odd?
+  end
 
   def max_level
     @question_set.max_by{ |q| q.difficulty }.difficulty
