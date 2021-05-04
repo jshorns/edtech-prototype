@@ -80,6 +80,12 @@ describe QuestionPicker do
       expect(question3).to receive(:correctly_answered?)
       expect(subject.decide_difficulty).to eq 3
     end
+    it 'should return max difficulty if last answer was correct and already at top level' do
+      allow(question5).to receive(:submit_answer).with(:b)
+      allow(question5).to receive(:correctly_answered?).and_return(true)
+      subject.answer_question(question5, :b)
+      expect(subject.decide_difficulty).to eq 3
+    end
   end
 
 end
