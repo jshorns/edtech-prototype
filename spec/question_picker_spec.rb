@@ -46,16 +46,20 @@ describe QuestionPicker do
   subject { described_class.new(question_set) }
 
   describe '#fetch_question' do
+
     it 'should return a question of a given difficulty' do
       question = subject.fetch_question(3)
       expect(question.difficulty).to eq(3)
     end
+
   end
 
   describe '#answer_question' do
+
   before(:each) {
     allow(question1).to receive(:submit_answer).with(:a)
   }
+
     it 'allows question answer to be submitted' do
       expect(question1).to receive(:submit_answer).with(:a)
       subject.answer_question(question1, :a)
@@ -64,13 +68,16 @@ describe QuestionPicker do
       subject.answer_question(question1, :a)
       expect(subject.student_record).to include(question1)
     end
+
   end
 
   describe '#decide_difficulty' do
+
     before(:each) {
       allow(question3).to receive(:submit_answer).with(question3.correct_answer)
       allow(question3).to receive(:submit_answer).with("not the right answer")
     }
+
     it 'should return 2 if student record is empty' do
       expect(subject.decide_difficulty).to eq 2
     end
@@ -90,6 +97,12 @@ describe QuestionPicker do
       subject.answer_question(question3, "not the right answer")
       allow(question3).to receive(:correctly_answered?).and_return(false)
       expect(question3).to receive(:correctly_answered?)
+      expect(subject.decide_difficulty).to eq 1
+    end
+    it 'should return bottom level if previous q answered incorrectly and already at bottom level' do
+      allow(question1).to receive(:submit_answer).with("not the right answer")
+      allow(question1).to receive(:correctly_answered?).and_return(false)
+      subject.answer_question(question1, "not the right answer")
       expect(subject.decide_difficulty).to eq 1
     end
   end

@@ -9,6 +9,7 @@ class QuestionPicker
   def decide_difficulty
     return 2 unless !@student_record.empty?
     return 3 if @student_record.last.correctly_answered? && @student_record.last.difficulty == 3
+    return 1 if !@student_record.last.correctly_answered? && @student_record.last.difficulty == 1
     if @student_record.last.correctly_answered?
       @student_record.last.difficulty + 1
     else
