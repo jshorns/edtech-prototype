@@ -7,7 +7,10 @@ class QuestionPicker
   end
 
   def decide_difficulty
-    2 unless !@student_record.empty?
+    return 2 unless !@student_record.empty?
+    if @student_record.last.correctly_answered?
+      @student_record.last.difficulty + 1
+    end
   end
 
   def fetch_question(difficulty)

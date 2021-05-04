@@ -26,7 +26,6 @@ describe Question do
 
   describe '#correctly_answered?' do
     it 'returns nil if the student has not submitted an answer yet' do
-      p subject.student_answer
       expect(subject.correctly_answered?).to be nil
     end
     it 'returns true if the student submitted the correct answer' do

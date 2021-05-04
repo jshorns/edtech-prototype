@@ -67,8 +67,18 @@ describe QuestionPicker do
   end
 
   describe '#decide_difficulty' do
+    before(:each) {
+      allow(question3).to receive(:submit_answer).with(:d)
+      allow(question3).to receive(:submit_answer).with(:b)
+    }
     it 'should return 2 if student record is empty' do
       expect(subject.decide_difficulty).to eq 2
+    end
+    it 'should return next level up if previous q answered correctly' do
+      subject.answer_question(question3, :d)
+      allow(question3).to receive(:correctly_answered?).and_return(true)
+      expect(question3).to receive(:correctly_answered?)
+      expect(subject.decide_difficulty).to eq 3
     end
   end
 
