@@ -7,7 +7,7 @@ class QuestionPicker
   end
 
   def decide_difficulty
-    return mid_level unless last_question
+    return mid_level if !last_question
     if last_question.correctly_answered?
       return max_level if at_max_level
       last_question.difficulty + 1
@@ -17,7 +17,7 @@ class QuestionPicker
     end
   end
 
-  def fetch_question(difficulty)
+  def fetch_question(difficulty = decide_difficulty)
     @question_set.select { |question| question.difficulty == difficulty }.sample
   end
 

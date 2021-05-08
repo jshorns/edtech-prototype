@@ -4,6 +4,8 @@ Prototype back-end for educational software/web app that would facilitate person
 
 Designed in Ruby with a view to ultimately turning this into an app with Rails or Sinatra.
 
+to do - add complexity to algorithm based on entire lesson performance. students still see prev questions. two version of algorithm - entire lesson and last 3 questions.
+
 ## MVP
 
 a program that gives students a follow-up question from an appropriate category of difficulty, based on their previous performance.
@@ -69,7 +71,8 @@ lesson->qp: "fetch another question based on student record average"
 - I'm going to try and TDD this prototype in Ruby. I plan to begin with the question picker as a method and work up from there.
 - I quickly discovered I couldn't test very much without some sample questions, which I then wrote as an array of hashes (obviously in the real deal they wouldn't be cat themed). Through trying to play around with this I also discovered that irb can't access local variables in required files, but it can access constants, which I didn't know!
 - Having got the question picker to return one of a set of questions, I then modified it to return a question of a given difficulty. The next step would be to modify the algorithm to calculate the required difficulty based on the student's previous answers. I realised at this point that refactoring would be necessary and I needed to start developing my OOP structure. I realised too that I had misssed a crucial element of my planning and user stories - the aspect of students being able to input answers, and being able to see if they were correct or not! This being essential to the functioning of the software, I decided to reorientate my approach to prioritise this, writing a couple of extra user stories and amending my sequence diagram.
-- Having completed this question class with basic functionality, I implemented the methods for submitting answers through the question picker, and storing an answer history. I then implemented a basic algorithm for leveling up if the last answer was correct, and down if it was incorrect. I added to this a guard to stay at the maximum level if there and correct, or at min level if there and incorrect. I then did substantial refactoring to remove magic numbers and follow SRP.
+- Having completed this question class with basic functionality, I implemented the methods for submitting answers through the question picker, and storing an answer history. I then implemented a basic algorithm for leveling up if the last answer was correct, and down if it was incorrect. I added to this a guard to stay at the maximum level if there and correct, or at min level if there and incorrect. I then did substantial refactoring to remove magic numbers and follow SRP. I got blocked for a bit by a bug but was able to resolve this by getting visibility on the problem.
+- We then discussed the idea of having different algorithm options for picking the next question. I realised at this point that it would make far more sense to have the algorithm itself be its own class, with the options contained within that class. The responsibility of the question picker would then simply be to deploy the selected algorithim, rather than perform any calculations. Rather than tamper with my existing, functional code, I decided to write and test the algorithim class first.
 
 test questions:
 

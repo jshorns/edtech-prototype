@@ -1,6 +1,44 @@
 {
   "RSpec": {
     "coverage": {
+      "/Users/joey/Projects/edtech-prototype/spec/adaptation_algorithm_spec.rb": {
+        "lines": [
+          1,
+          null,
+          1,
+          1,
+          2,
+          2,
+          null,
+          2,
+          2,
+          null,
+          null,
+          1,
+          1,
+          null,
+          1,
+          1,
+          null,
+          null,
+          null
+        ]
+      },
+      "/Users/joey/Projects/edtech-prototype/lib/adaptation_algorithm.rb": {
+        "lines": [
+          1,
+          null,
+          1,
+          2,
+          1,
+          null,
+          1,
+          null,
+          null,
+          null,
+          null
+        ]
+      },
       "/Users/joey/Projects/edtech-prototype/spec/question_picker_spec.rb": {
         "lines": [
           1,
@@ -255,6 +293,6 @@
         ]
       }
     },
-    "timestamp": 1620144310
+    "timestamp": 1620486015
   }
 }
