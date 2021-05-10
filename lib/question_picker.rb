@@ -15,6 +15,8 @@ class QuestionPicker
     difficulty = max_level if difficulty > max_level
     difficulty = min_level if difficulty < min_level
     @question_set.select { |question| question.difficulty == difficulty }.sample
+    # edge cases here where no questions remain of selected difficulty. maybe a while loop so that it keeps looking for questions while the select is coming up with nil? but then does it look for difficulty up or down? select within a given range?
+    # so the next iteration would be where question.difficulty.between?(difficulty -1, difficulty + 1)
   end
 
   def answer_question(question, answer)
