@@ -54,6 +54,11 @@ describe QuestionPicker do
       question = subject.fetch_question
       expect(question.difficulty).to eq(3)
     end
+    it 'should return a question of max difficulty if algorithm calculates higher than max level' do
+      allow(adaptation_algorithm).to receive(:calculate).and_return(4)
+      question = subject.fetch_question
+      expect(question.difficulty).to eq(3)
+    end
 
   end
 

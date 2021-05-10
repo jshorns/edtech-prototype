@@ -12,8 +12,8 @@ class QuestionPicker
 
   def fetch_question
     difficulty = @adaptation_algorithm.calculate(@student_record)
-    return max_level if difficulty > max_level
-    return min_level if difficulty < min_level
+    difficulty = max_level if difficulty > max_level
+    difficulty = min_level if difficulty < min_level
     @question_set.select { |question| question.difficulty == difficulty }.sample
   end
 
