@@ -350,8 +350,44 @@
           null,
           null
         ]
+      },
+      "/Users/joey/Projects/edtech-prototype/spec/student_record_spec.rb": {
+        "lines": [
+          1,
+          null,
+          1,
+          5,
+          null,
+          2,
+          2,
+          2,
+          2,
+          null,
+          null
+        ]
+      },
+      "/Users/joey/Projects/edtech-prototype/lib/student_record.rb": {
+        "lines": [
+          1,
+          1,
+          null,
+          1,
+          4,
+          null,
+          null,
+          1,
+          null,
+          null,
+          1,
+          null,
+          null,
+          1,
+          null,
+          null,
+          null
+        ]
       }
     },
-    "timestamp": 1620663431
+    "timestamp": 1620664588
   }
 }
