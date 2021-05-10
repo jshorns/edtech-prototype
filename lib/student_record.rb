@@ -10,21 +10,22 @@ class StudentRecord
   end
 
   def last_question_result
-    if @record.last.correctly_answered?
-      100
-    else
-      0
-    end
+    calculate_average(@record.last(1))
   end
 
   def three_question_average
-    correct = @record.last(3).select { |q| q.correctly_answered? }.size.to_f
-    (correct/3 * 100).round(2)
+    calculate_average(@record.last(3))
   end
 
   def all_time_average
-    correct = @record.select { |q| q.correctly_answered? }.size.to_f
-    (correct/@record.length * 100).round(2)
+    calculate_average(@record)
+  end
+
+  private
+
+  def calculate_average(selection)
+    correct = selection.select { |q| q.correctly_answered? }.size.to_f
+    (correct/selection.length * 100).round(2)
   end
 
 end
