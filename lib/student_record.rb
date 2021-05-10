@@ -5,6 +5,10 @@ class StudentRecord
     @record = []
   end
 
+  def add_question(question)
+    @record << question
+  end
+
   def last_question_result
   end
 

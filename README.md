@@ -40,6 +40,8 @@ I don't want students to see questions they have answered before._
 
 (do we want this to be a feature? or only if they have answered correctly? what would the program do when a student answers incorrectly other than respond with the next question? would it tell them the right answer, or point them to a resource to look at to find out the right answer?)
 
+(what to do if there is no question available of the selected difficulty? dependent on question set sizes, etc)
+
 ## Classes
 
 student_record: knows students previous answers, calculates average

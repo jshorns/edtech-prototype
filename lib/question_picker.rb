@@ -1,29 +1,20 @@
+require 'student_record'
+
 class QuestionPicker
   attr_reader :student_record
 
-  def initialize(question_set)
+  def initialize(question_set, student_record = StudentRecord.new)
     @question_set = question_set
-    @student_record = []
+    @student_record = student_record
   end
 
-  def decide_difficulty
-    return mid_level if !last_question
-    if last_question.correctly_answered?
-      return max_level if at_max_level
-      last_question.difficulty + 1
-    else
-      return min_level if at_min_level
-      last_question.difficulty - 1
-    end
-  end
-
-  def fetch_question(difficulty = decide_difficulty)
+  def fetch_question(difficulty)
     @question_set.select { |question| question.difficulty == difficulty }.sample
   end
 
   def answer_question(question, answer)
     question.submit_answer(answer)
-    @student_record << question
+    @student_record.add_question(question)
   end
 
   private

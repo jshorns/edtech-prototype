@@ -43,7 +43,8 @@ describe QuestionPicker do
                                 )}
                                 
   let(:question_set)  { [question1, question2, question3, question4, question5] }
-  subject { described_class.new(question_set) }
+  let(:student_record) { double(:student_record) }
+  subject { described_class.new(question_set, student_record) }
 
   describe '#fetch_question' do
 
@@ -60,51 +61,13 @@ describe QuestionPicker do
     allow(question1).to receive(:submit_answer).with(:a)
   }
 
-    it 'allows question answer to be submitted' do
+    it 'allows question answer to be submitted to question and added to record' do
+      expect(student_record).to receive(:add_question).with( question1)
       expect(question1).to receive(:submit_answer).with(:a)
       subject.answer_question(question1, :a)
     end
-    it 'stores the answered question to a student record array' do
-      subject.answer_question(question1, :a)
-      expect(subject.student_record).to include(question1)
-    end
 
   end
 
-  describe '#decide_difficulty' do
-
-    before(:each) {
-      allow(question3).to receive(:submit_answer).with(question3.correct_answer)
-      allow(question3).to receive(:submit_answer).with("not the right answer")
-    }
-
-    it 'should return 2 if student record is empty' do
-      expect(subject.decide_difficulty).to eq 2
-    end
-    it 'should return one level up if previous q answered correctly' do
-      subject.answer_question(question3, question3.correct_answer)
-      allow(question3).to receive(:correctly_answered?).and_return(true)
-      expect(question3).to receive(:correctly_answered?)
-      expect(subject.decide_difficulty).to eq 3
-    end
-    it 'should return max difficulty if last answer was correct and already at top level' do
-      allow(question5).to receive(:submit_answer).with(question5.correct_answer)
-      allow(question5).to receive(:correctly_answered?).and_return(true)
-      subject.answer_question(question5, question5.correct_answer)
-      expect(subject.decide_difficulty).to eq 3
-    end
-    it 'should return one level down if previous q answered incorrectly' do
-      subject.answer_question(question3, "not the right answer")
-      allow(question3).to receive(:correctly_answered?).and_return(false)
-      expect(question3).to receive(:correctly_answered?)
-      expect(subject.decide_difficulty).to eq 1
-    end
-    it 'should return bottom level if previous q answered incorrectly and already at bottom level' do
-      allow(question1).to receive(:submit_answer).with("not the right answer")
-      allow(question1).to receive(:correctly_answered?).and_return(false)
-      subject.answer_question(question1, "not the right answer")
-      expect(subject.decide_difficulty).to eq 1
-    end
-  end
 
 end
