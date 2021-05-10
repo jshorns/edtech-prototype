@@ -7,9 +7,9 @@ describe AdaptationAlgorithm do
 
   describe '#default' do
     let(:good_student_record) { double(:student_record, 
-                                :last_question=> mid_level_correct_answer) }
+                                :last_question=> mid_level_correct_answer, last_question_result: 100) }
     let(:bad_student_record) { double(:student_record, 
-                                :last_question=> mid_level_incorrect_answer) }
+                                :last_question=> mid_level_incorrect_answer, last_question_result: 0) }
 
     it 'should return prev question difficulty + 1 if last question answered correctly' do
       expect(subject.default(good_student_record)).to eq 3
@@ -38,4 +38,22 @@ describe AdaptationAlgorithm do
     end
 
   end 
+
+  describe '#all_questions' do
+  
+  let(:poor_student_record) { double(:student_record, :all_time_average => 30.00, :last_question => mid_level_incorrect_answer) }
+  let(:average_student_record) { double(:student_record, :all_time_average => 60.00, :last_question => mid_level_incorrect_answer) }
+  let(:good_student_record) { double(:student_record, :all_time_average => 90.00, :last_question => mid_level_correct_answer) }
+  
+  it 'should go down a level if 3 question average is in bottom third' do
+    expect(subject.all_questions(poor_student_record)).to eq poor_student_record.last_question.difficulty - 1
+  end
+  it 'should stay the same if 3 question average is in bottom third' do
+    expect(subject.all_questions(average_student_record)).to eq poor_student_record.last_question.difficulty
+  end
+  it 'should go up a level if 3 question average is in top third' do
+    expect(subject.all_questions(good_student_record)).to eq poor_student_record.last_question.difficulty + 1
+  end
+
+end 
 end
