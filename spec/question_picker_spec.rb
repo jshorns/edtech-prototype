@@ -44,12 +44,14 @@ describe QuestionPicker do
                                 
   let(:question_set)  { [question1, question2, question3, question4, question5] }
   let(:student_record) { double(:student_record) }
-  subject { described_class.new(question_set, student_record) }
+  let(:adaptation_algorithm) { double(:adaptation_algorithm) }
+  subject { described_class.new(question_set, student_record, adaptation_algorithm) }
 
   describe '#fetch_question' do
 
-    it 'should return a question of a given difficulty' do
-      question = subject.fetch_question(3)
+    it 'should return a question of difficulty calculated by the algorithm' do
+      allow(adaptation_algorithm).to receive(:calculate).and_return(3)
+      question = subject.fetch_question
       expect(question.difficulty).to eq(3)
     end
 

@@ -1,14 +1,19 @@
 require 'student_record'
+require 'adaptation_algorithm'
 
 class QuestionPicker
   attr_reader :student_record
 
-  def initialize(question_set, student_record = StudentRecord.new)
+  def initialize(question_set, student_record = StudentRecord.new, adaptation_algorithm = DefaultAA.new)
     @question_set = question_set
     @student_record = student_record
+    @adaptation_algorithm = adaptation_algorithm
   end
 
-  def fetch_question(difficulty)
+  def fetch_question
+    difficulty = @adaptation_algorithm.calculate(@student_record)
+    return max_level if difficulty > max_level
+    return min_level if difficulty < min_level
     @question_set.select { |question| question.difficulty == difficulty }.sample
   end
 
@@ -18,12 +23,6 @@ class QuestionPicker
   end
 
   private
-
-  def mid_level
-    levels = @question_set.map{ |q| q.difficulty }.sort.uniq
-    return levels[(levels.length/2) - 1] if levels.length.even?
-    return levels[(levels.length - 1) /2] if levels.length.odd?
-  end
 
   def max_level
     @question_set.max_by{ |q| q.difficulty }.difficulty
@@ -40,11 +39,5 @@ class QuestionPicker
   def at_min_level
     last_question.difficulty == min_level
   end
-
-  def last_question
-    @student_record.last
-  end
-
-
 
 end
