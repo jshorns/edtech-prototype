@@ -215,6 +215,8 @@
           12,
           null,
           null,
+          null,
+          null,
           1,
           1,
           1,
@@ -276,6 +278,39 @@
           null
         ]
       },
+      "/Users/joey/Projects/edtech-prototype/spec/question_set_spec.rb": {
+        "lines": [
+          1,
+          null,
+          1,
+          2,
+          2,
+          2,
+          null,
+          1,
+          1,
+          1,
+          null,
+          1,
+          1,
+          1,
+          null,
+          null,
+          null
+        ]
+      },
+      "/Users/joey/Projects/edtech-prototype/lib/question_set.rb": {
+        "lines": [
+          1,
+          1,
+          null,
+          1,
+          2,
+          null,
+          null,
+          null
+        ]
+      },
       "/Users/joey/Projects/edtech-prototype/spec/question_spec.rb": {
         "lines": [
           1,
@@ -324,6 +359,8 @@
       "/Users/joey/Projects/edtech-prototype/lib/question.rb": {
         "lines": [
           1,
+          null,
+          null,
           null,
           1,
           null,
@@ -421,6 +458,6 @@
         ]
       }
     },
-    "timestamp": 1620672241
+    "timestamp": 1620828833
   }
 }
