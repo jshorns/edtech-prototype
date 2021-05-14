@@ -42,7 +42,7 @@ describe QuestionPicker do
                                 correct_answer: :b
                                 )}
                                 
-  let(:question_set)  { [question1, question2, question3, question4, question5] }
+  let(:question_set)  { double(:question_set, :questions => [question1, question2, question3, question4, question5],  min_level: 1, max_level: 3, range: 3) }
   let(:student_record) { double(:student_record) }
   let(:adaptation_algorithm) { double(:adaptation_algorithm) }
   subject { described_class.new(question_set, student_record, adaptation_algorithm) }
@@ -55,9 +55,14 @@ describe QuestionPicker do
       expect(question.difficulty).to eq(3)
     end
     it 'should return a question of max difficulty if algorithm calculates higher than max level' do
-      allow(adaptation_algorithm).to receive(:calculate).and_return(4)
+      allow(adaptation_algorithm).to receive(:calculate).and_return(question_set.max_level + 1)
       question = subject.fetch_question
-      expect(question.difficulty).to eq(3)
+      expect(question.difficulty).to eq(question_set.max_level)
+    end
+    it 'should return a question of min difficulty if algorithm calculates lower than min level' do
+      allow(adaptation_algorithm).to receive(:calculate).and_return(question_set.min_level - 1)
+      question = subject.fetch_question
+      expect(question.difficulty).to eq(question_set.min_level)
     end
 
   end
