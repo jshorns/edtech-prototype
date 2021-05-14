@@ -1,7 +1,9 @@
 require 'student_record'
 require 'adaptation_algorithm'
+require 'question_set'
+require 'question'
 
-class QuestionPicker
+class Lesson
   attr_reader :student_record
 
   def initialize(question_set, student_record = StudentRecord.new, adaptation_algorithm = DefaultAA.new)

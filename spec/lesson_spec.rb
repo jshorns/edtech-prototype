@@ -1,6 +1,6 @@
-require 'question_picker'
+require 'lesson'
 
-describe QuestionPicker do
+describe Lesson do
   let(:question1) { double(:question, question_text: "Is pudding a cat or a dog?", 
                                       answer_a: "cat", 
                                       answer_b: "dog", 
