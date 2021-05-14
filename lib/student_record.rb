@@ -4,6 +4,14 @@ class StudentRecord
   def initialize
     @record = []
   end
+  
+  def first_question?
+    @record.empty?
+  end
+
+  def last_question
+    @record.last
+  end
 
   def add_question(question)
     @record << question

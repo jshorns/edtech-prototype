@@ -48,21 +48,39 @@ describe Lesson do
   subject { described_class.new(question_set, student_record, adaptation_algorithm) }
 
   describe '#fetch_question' do
-
-    it 'should return a question of difficulty calculated by the algorithm' do
-      allow(adaptation_algorithm).to receive(:calculate).and_return(3)
-      question = subject.fetch_question
-      expect(question.difficulty).to eq(3)
-    end
-    it 'should return a question of max difficulty if algorithm calculates higher than max level' do
-      allow(adaptation_algorithm).to receive(:calculate).and_return(question_set.max_level + 1)
-      question = subject.fetch_question
-      expect(question.difficulty).to eq(question_set.max_level)
-    end
-    it 'should return a question of min difficulty if algorithm calculates lower than min level' do
-      allow(adaptation_algorithm).to receive(:calculate).and_return(question_set.min_level - 1)
+    it 'should return min level if its the first question' do
+      allow(student_record).to receive(:first_question?).and_return(true)
+      allow(question_set).to receive(:complete?).and_return(false)
       question = subject.fetch_question
       expect(question.difficulty).to eq(question_set.min_level)
+    end
+    describe 'when student record contains questions' do
+      it 'should return a question of difficulty calculated by the algorithm' do
+        allow(student_record).to receive(:first_question?).and_return(false)
+        allow(question_set).to receive(:complete?).and_return(false)
+        allow(adaptation_algorithm).to receive(:calculate).and_return(3)
+        question = subject.fetch_question
+        expect(question.difficulty).to eq(3)
+      end
+      it 'should return a question of max difficulty if algorithm calculates higher than max level' do
+        allow(student_record).to receive(:first_question?).and_return(false)
+        allow(question_set).to receive(:complete?).and_return(false)
+        allow(adaptation_algorithm).to receive(:calculate).and_return(question_set.max_level + 1)
+        question = subject.fetch_question
+        expect(question.difficulty).to eq(question_set.max_level)
+      end
+      it 'should return a question of min difficulty if algorithm calculates lower than min level' do
+        allow(question_set).to receive(:complete?).and_return(false)
+        allow(student_record).to receive(:first_question?).and_return(false)
+        allow(adaptation_algorithm).to receive(:calculate).and_return(question_set.min_level - 1)
+        question = subject.fetch_question
+        expect(question.difficulty).to eq(question_set.min_level)
+      end
+      it 'should return completion message if question set is complete' do
+        allow(student_record).to receive(:first_question?).and_return(false)
+        allow(question_set).to receive(:complete?).and_return(true)
+        expect(subject.fetch_question).to eq 'You have answered all the questions!'
+      end
     end
 
   end

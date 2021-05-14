@@ -12,6 +12,20 @@ let(:incorrect_answer) { double(:question, :correctly_answered? => false) }
   it { is_expected.to respond_to(:three_question_average) }
   it { is_expected.to respond_to(:all_time_average) }
 
+  describe '#first_question?' do
+    it 'returns true if no questions have yet been answered' do
+      expect(subject.first_question?).to be true
+    end
+  end
+
+  describe '#last_question' do
+    it 'returns the most recently answered question' do
+      subject.add_question(correct_answer)
+      expect(subject.last_question).to eq correct_answer
+    end
+  end
+
+  
   describe '#add_question' do
     it 'pushes a question to the @record array' do
       subject.add_question(correct_answer)

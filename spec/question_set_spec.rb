@@ -15,6 +15,13 @@ describe QuestionSet do
     end
   end
 
+  describe '#complete' do
+    it 'returns true if there are no questions in the array' do
+      empty_qs = described_class.new
+      expect(empty_qs.complete?).to eq true
+    end
+  end
+
   describe 'min_level' do
     it 'should return the minimum difficulty level in a given question set' do
       expect(qs.min_level).to eq 1

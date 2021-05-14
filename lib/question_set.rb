@@ -6,6 +6,10 @@ class QuestionSet
     @difficulties = @questions.map{ |q| q.difficulty }
   end
 
+  def complete?
+    @questions.empty?
+  end
+
   def max_level
     @difficulties.max
   end
